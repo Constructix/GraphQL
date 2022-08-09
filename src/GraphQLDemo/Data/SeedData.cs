@@ -3,6 +3,23 @@ namespace Data
 {
     public class Seed
     {
+
+
+        public static List<Actor> SeedActors()
+        {
+            var actors = new List<Actor>
+            {
+                new Actor() { FirstName = "Mike", LastName = "Listo" },
+                new Actor() { FirstName = "Bill", LastName = "D'Elia" },
+                new Actor() { FirstName = "Robert", LastName = "Yannetti" },
+                new Actor() { FirstName = "Steve", LastName = "Robin" },
+                new Actor() { FirstName = "James", LastName = "R. Bagdonas" },
+                new Actor() { FirstName = "Jeff", LastName = "Bleckner" },
+            };
+            return actors;
+        }
+        
+        
         public static List<Movie> SeedData()
         {
             var actors = new List<Actor>
