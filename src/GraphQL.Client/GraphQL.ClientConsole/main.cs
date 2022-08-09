@@ -2,24 +2,21 @@
 GraphqlClientBase.ITransferService _transferService = new GraphqlClientBase.TransferService();
 Console.WriteLine("Getting Movie Information.....");
 var movieDetails = await _transferService.GetMovies();
-PrintMovies(movieDetails.Movies);
+
+movieDetails.Movies.ForEach(x=>PrintMovie(x));
+
 Console.WriteLine();
 Console.WriteLine("Searching for movie id == 2");
 SearchForMovieById(movieDetails, 2);
+
 Console.WriteLine(new String('-', 80));
 Console.WriteLine("Now calling Movies and actors, should return all movies and actors");
 Console.WriteLine();
 Console.WriteLine();
+
 var details = await  _transferService.GetMovieAndActors();
 PrintAllMoviesAndAllActors(details);
 
-void PrintMovies(List<Movie> movies)
-{
-    foreach (var movie in movies)
-    {
-      PrintMovie(movie);
-    }
-}
 
 void PrintMovie(Movie movie)
 {
@@ -42,7 +39,7 @@ void SearchForMovieById(GraphqlClientBase.MovieDetails movieDetails2, int moveId
 void PrintAllMoviesAndAllActors(GraphqlClientBase.MovieAndActorsResponse movieAndActorsResponse)
 {
     Console.WriteLine("------- Movies------");
-    PrintMovies(movieAndActorsResponse.Movies.ToList());
+    movieAndActorsResponse.Movies.ToList().ForEach(x=>PrintMovie(x));
     Console.WriteLine("------- Actors------");
     foreach (var currentActor in movieAndActorsResponse.Actors)
     {
