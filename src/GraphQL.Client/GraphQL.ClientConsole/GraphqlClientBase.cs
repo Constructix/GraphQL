@@ -35,6 +35,8 @@ public abstract class GraphqlClientBase
     
     public class TransferService : GraphqlClientBase, ITransferService
     {
+
+      
         public async Task<MovieDetails> GetMovies()
         {
             var query = @"query MyQuery { movies { id, title, actors { firstName, lastName} }}";

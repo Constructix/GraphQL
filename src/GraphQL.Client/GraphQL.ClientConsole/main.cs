@@ -24,3 +24,11 @@ void PrintMovies(GraphqlClientBase.MovieDetails movieDetails1)
     }
 }
 
+SearchForMovieById(movieDetails);
+
+void SearchForMovieById(GraphqlClientBase.MovieDetails movieDetails2)
+{
+    var movieIdExists = movieDetails2.Movies.Find(x => x.Id == 2);
+
+    Console.WriteLine(movieIdExists != null ? "Movie Exists......." : "Movie Does not exist.....");
+}
