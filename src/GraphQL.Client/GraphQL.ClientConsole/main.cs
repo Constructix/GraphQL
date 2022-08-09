@@ -2,33 +2,50 @@
 GraphqlClientBase.ITransferService _transferService = new GraphqlClientBase.TransferService();
 Console.WriteLine("Getting Movie Information.....");
 var movieDetails = await _transferService.GetMovies();
-PrintMovies(movieDetails);
+PrintMovies(movieDetails.Movies);
 Console.WriteLine();
+Console.WriteLine("Searching for movie id == 2");
+SearchForMovieById(movieDetails, 2);
+Console.WriteLine(new String('-', 80));
 Console.WriteLine("Now calling Movies and actors, should return all movies and actors");
-
+Console.WriteLine();
+Console.WriteLine();
 var details = await  _transferService.GetMovieAndActors();
+PrintAllMoviesAndAllActors(details);
 
-foreach (var currentActor in details.Actors)
+void PrintMovies(List<Movie> movies)
 {
-    Console.WriteLine($"{currentActor.FirstName} {currentActor.LastName}");
-}
-
-
-void PrintMovies(GraphqlClientBase.MovieDetails movieDetails1)
-{
-    foreach (var movie in movieDetails1.Movies)
+    foreach (var movie in movies)
     {
-        Console.WriteLine($"{movie.Title}");
-        Console.WriteLine("Actors");
-        movie.Actors.ForEach(x => Console.WriteLine($"\t{x.FirstName} {x.LastName}"));
+      PrintMovie(movie);
     }
 }
 
-SearchForMovieById(movieDetails);
-
-void SearchForMovieById(GraphqlClientBase.MovieDetails movieDetails2)
+void PrintMovie(Movie movie)
 {
-    var movieIdExists = movieDetails2.Movies.Find(x => x.Id == 2);
-
-    Console.WriteLine(movieIdExists != null ? "Movie Exists......." : "Movie Does not exist.....");
+    Console.WriteLine($"{movie.Title}");
+    Console.WriteLine("Actors");
+    movie.Actors.ForEach(x => Console.WriteLine($"\t{x.FirstName} {x.LastName}"));
+}
+void SearchForMovieById(GraphqlClientBase.MovieDetails movieDetails2, int moveIdToSearchFor)
+{
+    var selectedMovie = movieDetails2.Movies.Find(x => x.Id == moveIdToSearchFor);
+    if (selectedMovie != null)
+    {
+        PrintMovie(selectedMovie);
+    }
+    else
+    {
+        Console.WriteLine("Movie Does Not Exist");
+    }
+}
+void PrintAllMoviesAndAllActors(GraphqlClientBase.MovieAndActorsResponse movieAndActorsResponse)
+{
+    Console.WriteLine("------- Movies------");
+    PrintMovies(movieAndActorsResponse.Movies.ToList());
+    Console.WriteLine("------- Actors------");
+    foreach (var currentActor in movieAndActorsResponse.Actors)
+    {
+        Console.WriteLine($"{currentActor.FirstName} {currentActor.LastName}");
+    }
 }
