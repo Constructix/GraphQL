@@ -74,12 +74,12 @@ public abstract class GraphqlClientBase
 
     public class MovieDetails
     {
-        public List<Movie> Movies { get; set; }
+        public List<Movie> Movies { get; set; } = Enumerable.Empty<Movie>().ToList();
     }
 
     public class MovieAndActorsResponse
     {
-        public IEnumerable<Movie> Movies { get; set; }
-        public IEnumerable<Actor> Actors { get; set; }
+        public IEnumerable<Movie> Movies { get; set; } = Enumerable.Empty<Movie>();
+        public IEnumerable<Actor> Actors { get; set; } = Enumerable.Empty<Actor>();
     }
 }
