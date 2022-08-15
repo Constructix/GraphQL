@@ -36,6 +36,6 @@ public class MovieHandler: IMovieHandler
     
     public async Task<IEnumerable<Movie>> GetAllMoviesAsync() =>  await Task.FromResult(_movies);
 
-    public async Task<Movie> GetMovieById(int id) => await Task.FromResult(_movies.FirstOrDefault(x => x.Id == id));
+    public async Task<Movie> GetMovieById(int id) => await Task.FromResult(_movies.FirstOrDefault(movie => movie.Id == id, null));
 
 }
