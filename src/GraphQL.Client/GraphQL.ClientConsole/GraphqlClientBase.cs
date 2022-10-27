@@ -17,7 +17,7 @@ public abstract class GraphqlClientBase
     public GraphQLHttpClient GetGraphQlApiClient()
     {
         //initialize graphql endpoint eg:https://testproject1.hasura.app/v1/graphql
-        var endpoint = "http://localhost:5266/graphQL";
+        var endpoint = " http://localhost:5000/graphQL";
 
         var httpClientOption = new GraphQLHttpClientOptions
         {
